@@ -136,3 +136,24 @@ spec:
         image: nginx
         ports:
          - containerport: 
+--->>>Note: Deployment,Replicaset apiVersion: apps/v1
+---->>Note: Pod,Replicacontroller apiversion: v1
+----->Deployment,Replicaset
+     spec:
+       replicas: 3
+       selector:
+         matchlables:
+           app: nginx
+         template:
+          metadata:
+----->> Pod,Replicacontroller
+        spec:
+          replicas: 3
+          template:
+            metadat:
+              name: 
+               lables:
+                 app:
+                 
+          
+                  
