@@ -1,0 +1,138 @@
+1.kubectl get nodes
+kubectl get pods
+kubectl get pods -o wide
+kubectl run --image nginx webserver --port=80 --hostport=8989
+kubectl run --image mysql:5 mydb --env MYSQL_ROOT_PASSWORD=admin 
+kubectl run --image tomcat appserver --port=8080 --hostport=7878
+kubectl exec mydb -it bash
+kubectl delete service_name
+kubectl logs -f podname
+#1.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  lables:
+   app: https
+spec: 
+  containers: 
+  - name: httpd
+    image: httpd
+#2.
+apiversion: v1
+kind: Pod
+metadata: 
+  name: myapp-postgres
+  lables:
+   dbnaem: postgre
+   tier: mydb
+spec: 
+  containers: 
+  - name: postgres
+    image: postgres
+#3.
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: myapp-mysql
+  lables:
+   dbtype: mysql
+spec: 
+  containers:
+  - name: mysql
+    image: mysql:5
+    env:
+     - name: MYSQL_ROOT_PASSWORD
+       value: admin       
+#4.
+apiVersin: v1
+kind: Pod
+metadata:
+  name: jenkinsserver
+  lables:
+     ci: cd
+spec:
+  containers:
+  - name: jenkins
+    image: jenkins
+    ports:
+     - containerport: 8080
+       hostport: 8080
+#5.
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: nexuspulling
+  lables: 
+   type: nexus
+spec:
+  containers: 
+  - name: deployment
+    image: ipaddres:8081/nexus/student.war
+    imagepullpolice: Always
+  imagepullsecret:
+   - nexus
+#6.apiVersion: v1
+kind: Replicationcontroller
+metadata: 
+  name: my-rc-tomcat
+spec:
+  replicas: 3
+  templates
+   metadata:
+     name: app-tomcat
+     lables:
+      app: tomcat
+   spec:
+     containers: 
+     - name: tomcat
+       image: tomcat
+       ports: 
+        - connectorport: 8080
+          hostport: 9090
+#7.
+apiVersion: apps/v1
+kind: Replicaset
+metadata:
+  name: frontend
+  lables:
+   name: frontend
+spec:
+ replicas: 3
+ selectors:
+ 
+ template:
+  metadata:
+    name: 
+    lables:
+     app:
+  spec:
+    containers:
+    - name: 
+      image:
+scaling up and down
+kubectl scale --replicas=6 -f name.yml
+kubctl scale --replicas=3 -f name.yml
+#9.
+apiVersin: apps/v1
+kind: Deployment
+metadat:
+  name: nginx-deployment
+  lables:
+   app: nginx
+spec:
+  replicas: 3
+  selector:
+   matchlables:
+     app: nginx
+  template:
+    metadata:
+      name: 
+      lables: 
+       app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+         - containerport: 
